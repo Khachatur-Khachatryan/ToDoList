@@ -1,27 +1,15 @@
 ﻿using System;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace ToDoList
 {
-    class TaskList : ICollection<Task>
+    class TaskList 
     {
         /* 
          * Спиок задач
          */
         public readonly List<Task> Tasks = new List<Task>();
-
-        public int Count
-        {
-            get { return Tasks.Count; }
-        }
-
-
-        public bool IsReadOnly
-        { 
-            get { return true; }
-        }
 
         /*
          * Метод для создания новой задачи
@@ -73,42 +61,6 @@ namespace ToDoList
         public void UpdateStart(int id, DateTime start)
         {
             Tasks[--id].Start = start;
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            foreach (var task in Tasks)
-                yield return task;
-        }
-
-        public void Add(Task task)
-        {
-            Tasks.Add(task);
-        }
-
-        public void Clear()
-        {
-            Tasks.Clear();
-        }
-
-        public bool Contains(Task task)
-        {
-            return Tasks.Contains(task);
-        }
-
-        public void CopyTo(Task[] array, int arrayIndex)
-        {
-            Tasks.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(Task task)
-        {
-            return Tasks.Remove(task);
-        }
-
-        IEnumerator<Task> IEnumerable<Task>.GetEnumerator()
-        {
-            return Tasks.GetEnumerator();
         }
     }
 }
