@@ -23,7 +23,6 @@ namespace ToDoList
          * Дата конца выполнения задачи
          */
         public DateTime End { get; set; }
-
         public override string ToString()
         {
             return $"{Id}. {Content} \n" +
