@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace ToDoList
 {
-    class TaskList 
+    class TaskList : IEnumerable
     {
         /* 
          * Спиок задач
          */
-        public readonly List<Task> Tasks = new List<Task>();
+        public List<Task> Tasks { get; set; }
 
         /*
          * Метод для создания новой задачи
@@ -61,6 +61,11 @@ namespace ToDoList
         public void UpdateStart(int id, DateTime start)
         {
             Tasks[--id].Start = start;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return Tasks.GetEnumerator();
         }
     }
 }

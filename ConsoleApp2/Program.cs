@@ -51,7 +51,7 @@ namespace ToDoList
                 catch (Exception)
                 {
                     Console.WriteLine("Ошибка. Введите дату начала выполнения задачи");
-                    task.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    task.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
                 Console.WriteLine("Введите содержимое задачи");
@@ -74,9 +74,9 @@ namespace ToDoList
             while (true)
             {
                 var taskListJson = File.ReadAllText(@"TaskList.json");
-                var taskList = JsonConvert.DeserializeObject<TaskList>(taskListJson);
-                List<Task> tasks = taskList.Tasks;
-
+                var tasks = JsonConvert.DeserializeObject<List<Task>>(taskListJson);
+                var taskList = new TaskList() { Tasks = tasks };
+                
                 ShowTasks(taskList);
 
                 Console.WriteLine();
@@ -98,12 +98,21 @@ namespace ToDoList
         /*
          * Метод для отображения задач
          */
+        public static void ShowTasks(List<Task> tasks)
+        {
+            Console.WriteLine("Список задач:");
+            Console.WriteLine();
+
+            foreach (var task in tasks)
+                Console.WriteLine(task);
+        }
+
         public static void ShowTasks(TaskList taskList)
         {
             Console.WriteLine("Список задач:");
             Console.WriteLine();
 
-            foreach (var task in taskList) 
+            foreach (var task in taskList)
                 Console.WriteLine(task);
         }
 
@@ -134,7 +143,7 @@ namespace ToDoList
                     "Выйти из программы: /close"
                 );
         }
-        
+
         /*
          * Метод для ввода комманды
          */
@@ -195,9 +204,9 @@ namespace ToDoList
 
                 Console.WriteLine("Введите изменённое содержимое");
                 var content = Console.ReadLine();
-                
+
                 taskList.UpdateContent(id, content);
-                
+
                 SerializeToJson(taskList);
 
                 return true;
@@ -220,12 +229,12 @@ namespace ToDoList
             {
                 Console.WriteLine("Введите номер задачи, которую вы хотите изменить");
                 var id = int.Parse(Console.ReadLine());
-                
+
                 Console.WriteLine("Введите изменённую дату конца выполнения в формате dd.mm.yyyy. Например : 04.06.2005");
                 var end = DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy", cultureInfo);
-                
+
                 taskList.UpdateEnd(id, end);
-                
+
                 SerializeToJson(taskList);
 
                 return true;
@@ -236,6 +245,6 @@ namespace ToDoList
             }
 
             return false;
-        } 
+        }
     }
 }
