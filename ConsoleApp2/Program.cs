@@ -100,15 +100,6 @@ namespace ToDoList
         /*
          * Метод для отображения задач
          */
-        public static void ShowTasks(List<Task> tasks)
-        {
-            Console.WriteLine("Список задач:");
-            Console.WriteLine();
-
-            foreach (var task in tasks)
-                Console.WriteLine(task);
-        }
-
         public static void ShowTasks(TaskList taskList)
         {
             Console.WriteLine("Список задач:");
