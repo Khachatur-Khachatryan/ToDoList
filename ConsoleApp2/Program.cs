@@ -76,6 +76,8 @@ namespace ToDoList
                 var taskListJson = File.ReadAllText(@"TaskList.json");
                 var tasks = JsonConvert.DeserializeObject<List<Task>>(taskListJson);
                 var taskList = new TaskList() { Tasks = tasks };
+
+                Console.WriteLine($"Количество задач: {taskList.Count}");
                 
                 ShowTasks(taskList);
 

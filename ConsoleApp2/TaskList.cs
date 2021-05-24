@@ -7,9 +7,20 @@ namespace ToDoList
     class TaskList : IEnumerable
     {
         /* 
-         * Спиок задач
+         * Список задач
          */
         public List<Task> Tasks { get; set; }
+
+        /*
+         * Количество задач
+         */
+        public int Count 
+        { 
+            get
+            {
+                return Tasks.Count;
+            }
+        }
 
         /*
          * Метод для создания новой задачи
