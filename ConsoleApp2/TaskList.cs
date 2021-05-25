@@ -4,23 +4,25 @@ using System.Collections.Generic;
 
 namespace ToDoList
 {
-    class TaskList : IEnumerable
+    class TaskList : ICollection<Task>
     {
         /* 
          * Список задач
          */
-        public List<Task> Tasks { get; set; }
+        public List<Task> Tasks { get; set; } = new List<Task>();
 
         /*
          * Количество задач
          */
-        public int Count 
-        { 
+        public int Count
+        {
             get
             {
                 return Tasks.Count;
             }
         }
+
+        public bool IsReadOnly { get { return false; } }
 
         /*
          * Метод для создания новой задачи
@@ -44,7 +46,7 @@ namespace ToDoList
                 Console.WriteLine("Ошибка. Введите номер задачи, которую вы хотите удалить");
             }
 
-            for(int i = 1; i < Tasks.Count; i++)
+            for (int i = 1; i < Tasks.Count; i++)
             {
                 Tasks[i].Id = ++i;
             }
@@ -72,6 +74,36 @@ namespace ToDoList
         public void UpdateStart(int id, DateTime start)
         {
             Tasks[--id].Start = start;
+        }
+
+        public void CopyTo(Task[] array, int index)
+        {
+            Tasks.CopyTo(array, index);
+        }
+
+        public void Add(Task item)
+        {
+            ((ICollection<Task>)Tasks).Add(item);
+        }
+
+        public void Clear()
+        {
+            ((ICollection<Task>)Tasks).Clear();
+        }
+
+        public bool Contains(Task item)
+        {
+            return ((ICollection<Task>)Tasks).Contains(item);
+        }
+
+        public bool Remove(Task item)
+        {
+            return Tasks.Remove(item);
+        }
+
+        IEnumerator<Task> IEnumerable<Task>.GetEnumerator()
+        {
+            return Tasks.GetEnumerator();
         }
 
         public IEnumerator GetEnumerator()

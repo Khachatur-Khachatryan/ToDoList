@@ -23,6 +23,23 @@ namespace ToDoList
          * Дата конца выполнения задачи
          */
         public DateTime End { get; set; }
+
+        //public string Status
+        //{
+        //    get
+        //    {
+        //        if (DateTime.Now > End)
+        //        {
+        //            return "Выполнено";
+        //        }
+        //        else if (DateTime.Now > Start && DateTime.Now < End)
+        //        {
+        //            return "Выполняется";
+        //        }
+
+        //        return "Не выполнено";
+        //    }
+        //}
         public override string ToString()
         {
             return $"{Id}. {Content} \n" +

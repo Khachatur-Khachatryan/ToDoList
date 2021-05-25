@@ -1,8 +1,8 @@
 ﻿using System;
-using Newtonsoft.Json;
 using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ToDoList
 {
@@ -74,10 +74,12 @@ namespace ToDoList
             while (true)
             {
                 var taskListJson = File.ReadAllText(@"TaskList.json");
-                var tasks = JsonConvert.DeserializeObject<List<Task>>(taskListJson);
-                var taskList = new TaskList() { Tasks = tasks };
+                var taskList = JsonConvert.DeserializeObject<TaskList>(taskListJson);
+                var tasks = taskList.Tasks;
 
-                Console.WriteLine($"Количество задач: {taskList.Count}");
+
+
+                //Console.WriteLine($"Количество задач: {taskCount}");
                 
                 ShowTasks(taskList);
 
@@ -91,7 +93,10 @@ namespace ToDoList
                 Console.WriteLine();
                 var readCommand = ReadCommand(readLine, taskList, tasks);
                 if (readCommand == false)
+                {
+                    Console.Clear(); 
                     continue;
+                }
 
                 Console.Clear();
             }
@@ -159,7 +164,6 @@ namespace ToDoList
                     postTask.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
-
                 Console.WriteLine("Введите дату окончания выполнения задачи");
                 try
                 {
@@ -168,7 +172,7 @@ namespace ToDoList
                 catch (Exception)
                 {
                     Console.WriteLine("Ошибка. Введите дату начала выполнения задачи");
-                    postTask.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    postTask.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
                 Console.WriteLine("Введите содержимое задачи");
