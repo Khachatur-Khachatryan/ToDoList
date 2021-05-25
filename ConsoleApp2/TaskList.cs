@@ -9,7 +9,7 @@ namespace ToDoList
         /* 
          * Список задач
          */
-        public List<Task> Tasks { get; set; } = new List<Task>();
+        public List<Task> Tasks { get; } = new List<Task>();
 
         /*
          * Количество задач
