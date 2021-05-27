@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToDoList</name>
+    </assembly>
+    <members>
+        <member name="T:ToDoList.ToDo">
+            <summary>
+            Класс, реализующий работу со списком из ToDoItem
+            </summary>
+        </member>
+        <member name="P:ToDoList.ToDo.ToDoList">
+            <summary>
+            Список задач
+            </summary>
+        </member>
+        <member name="P:ToDoList.ToDo.Count">
+            <summary>
+            Количество задач
+            </summary>
+        </member>
+        <member name="M:ToDoList.ToDo.Post(ToDoList.ToDoItem)">
+            <summary>
+            Метод для создания новой задачи
+            </summary>
+            <param name="toDoItem"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.Delete(System.Int32)">
+            <summary>
+            Метод для удаления задачи по ID
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.UpdateContent(System.Int32,System.String)">
+            <summary>
+            Метод для изменения содержимого задачи по индексу
+            </summary>
+            <param name="id"></param>
+            <param name="content"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.UpdateEnd(System.Int32,System.DateTime)">
+            <summary>
+            Метод для изменения даты конца выполнения задачи по индексу
+            </summary>
+            <param name="id"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.UpdateStart(System.Int32,System.DateTime)">
+            <summary>
+            Метод для изменения даты начала выполнения задачи по индексу
+            </summary>
+            <param name="id"></param>
+            <param name="start"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.CopyTo(ToDoList.ToDoItem[],System.Int32)">
+            <summary>
+            Копирование данных массива в список
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.Add(ToDoList.ToDoItem)">
+            <summary>
+            Добавление нового элемента в список
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:ToDoList.ToDo.Clear">
+            <summary>
+            Очистка списка
+            </summary>
+        </member>
+        <member name="M:ToDoList.ToDo.Contains(ToDoList.ToDoItem)">
+            <summary>
+            Проверка на присутствие элемента в списке
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoList.ToDo.Remove(ToDoList.ToDoItem)">
+            <summary>
+            Удаление элемента из списка
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoList.ToDo.GetEnumerator">
+            <summary>
+            Внедрение поддержки цикла foreach в класс
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ToDoList.ToDoItem">
+            <summary>
+            Класс, реализующий модель задачи
+            </summary>
+        </member>
+        <member name="P:ToDoList.ToDoItem.Id">
+            <summary>
+            Порядковый номер задачи 
+            </summary>
+        </member>
+        <member name="P:ToDoList.ToDoItem.Content">
+            <summary>
+            Содержимое задачи
+            </summary>
+        </member>
+        <member name="P:ToDoList.ToDoItem.Start">
+            <summary>
+            Дата начала выполнения задачи
+            </summary>
+        </member>
+        <member name="P:ToDoList.ToDoItem.End">
+            <summary>
+            Дата конца выполнения задачи
+            </summary>
+        </member>
+        <member name="M:ToDoList.ToDoItem.ToString">
+            <summary>
+            Переопределённый метод toString
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

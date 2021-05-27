@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Codes\C#\.NET Core\Console apps\ConsoleApp2\ToDoList\ToDoList.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

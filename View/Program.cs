@@ -14,51 +14,51 @@ namespace ToDoList
 
         static void Main(string[] args)
         {
-            bool exists = File.Exists(@"TaskList.json");
+            bool exists = File.Exists(@"ToDo.json");
             if (exists)
             {
                 ApplicationStart();
             }
             else
             {
-                var taskList = new TaskList();
-                var tasks = taskList.Tasks;
+                var toDo = new ToDo();
+                var toDoList = toDo.ToDoList;
 
                 Console.WriteLine("Список задач пуст. Добавьте задачу");
                 Console.WriteLine();
 
-                var task = new Task();
+                var toDoItem = new ToDoItem();
 
-                task.Id = tasks.Count + 1;
+                toDoItem.Id = toDoList.Count + 1;
 
                 Console.WriteLine("Введите дату начала выполнения задачи");
                 try
                 {
-                    task.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    toDoItem.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Ошибка. Введите дату начала выполнения задачи");
-                    task.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    toDoItem.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
 
                 Console.WriteLine("Введите дату окончания выполнения задачи");
                 try
                 {
-                    task.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    toDoItem.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Ошибка. Введите дату начала выполнения задачи");
-                    task.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    toDoItem.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
                 Console.WriteLine("Введите содержимое задачи");
-                task.Content = Console.ReadLine();
+                toDoItem.Content = Console.ReadLine();
 
-                taskList.Post(task);
-                SerializeToJson(taskList);
+                toDo.Post(toDoItem);
+                SerializeToJson(toDo);
 
                 Console.Clear();
 
@@ -66,22 +66,20 @@ namespace ToDoList
             }
         }
 
-        /*
-         * Метод для запуска основного приложения
-         */
+        /// <summary>
+        /// Метод для запуска основного приложения
+        /// </summary>
         public static void ApplicationStart()
         {
             while (true)
             {
-                var taskListJson = File.ReadAllText(@"TaskList.json");
-                var taskList = JsonConvert.DeserializeObject<TaskList>(taskListJson);
-                var tasks = taskList.Tasks;
+                var toDoJson = File.ReadAllText(@"ToDo.json");
+                var toDo = JsonConvert.DeserializeObject<ToDo>(toDoJson);
+                var toDoList = toDo.ToDoList;
 
+                Console.WriteLine($"Количество задач: {toDo.Count}");
 
-
-                //Console.WriteLine($"Количество задач: {taskCount}");
-                
-                ShowTasks(taskList);
+                ShowTasks(toDo);
 
                 Console.WriteLine();
 
@@ -91,10 +89,10 @@ namespace ToDoList
 
                 var readLine = Console.ReadLine();
                 Console.WriteLine();
-                var readCommand = ReadCommand(readLine, taskList, tasks);
+                var readCommand = ReadCommand(readLine, toDo, toDoList);
                 if (readCommand == false)
                 {
-                    Console.Clear(); 
+                    Console.Clear();
                     continue;
                 }
 
@@ -102,33 +100,35 @@ namespace ToDoList
             }
         }
 
-        /*
-         * Метод для отображения задач
-         */
-        public static void ShowTasks(TaskList taskList)
+        /// <summary>
+        /// Метод для вывода уже существующих задач на экран
+        /// </summary>
+        /// <param name="toDo"></param>
+        public static void ShowTasks(ToDo toDo)
         {
             Console.WriteLine("Список задач:");
             Console.WriteLine();
 
-            foreach (var task in taskList)
-                Console.WriteLine(task);
+            foreach (var toDoItem in toDo)
+                Console.WriteLine(toDoItem);
         }
 
-        /*
-         * Метод для сериализации в JSON формат
-         */
-        public static void SerializeToJson(TaskList taskList)
+        /// <summary>
+        /// Метод для сериализации данных в JSON-формат и их записи в файл
+        /// </summary>
+        /// <param name="toDo"></param>
+        public static void SerializeToJson(ToDo toDo)
         {
-            using (var streamWriter = new StreamWriter(@"TaskList.json", false))
+            using (var streamWriter = new StreamWriter(@"ToDo.json", false))
             {
-                var serializedTaskList = JsonConvert.SerializeObject(taskList, serializeFormatting);
-                streamWriter.WriteLine(serializedTaskList);
+                var serializedToDoList = JsonConvert.SerializeObject(toDo, serializeFormatting);
+                streamWriter.WriteLine(serializedToDoList);
             }
         }
 
-        /*         
-         * Метод для отображения доступных комманд
-         */
+        /// <summary>
+        /// Метод для вывода консольных комманд
+        /// </summary>
         public static void ShowCommands()
         {
             Console.WriteLine
@@ -142,44 +142,48 @@ namespace ToDoList
                 );
         }
 
-        /*
-         * Метод для ввода комманды
-         */
-        public static bool ReadCommand(string readLine, TaskList taskList, List<Task> tasks)
+        /// <summary>
+        /// Метод для ввода команды
+        /// </summary>
+        /// <param name="readLine"></param>
+        /// <param name="toDo"></param>
+        /// <param name="toDoList"></param>
+        /// <returns></returns>
+        public static bool ReadCommand(string readLine, ToDo toDo, List<ToDoItem> toDoList)
         {
             if (readLine == "/post")
             {
-                var postTask = new Task();
+                var postToDoItem = new ToDoItem();
 
-                postTask.Id = 1 + tasks.Count;
+                postToDoItem.Id = 1 + toDoList.Count;
 
                 Console.WriteLine("Введите дату начала выполнения задачи");
                 try
                 {
-                    postTask.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    postToDoItem.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Ошибка. Введите дату начала выполнения задачи");
-                    postTask.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    postToDoItem.Start = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
                 Console.WriteLine("Введите дату окончания выполнения задачи");
                 try
                 {
-                    postTask.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    postToDoItem.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Ошибка. Введите дату начала выполнения задачи");
-                    postTask.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
+                    postToDoItem.End = DateTime.ParseExact(Console.ReadLine(), parseFormat, cultureInfo);
                 }
 
                 Console.WriteLine("Введите содержимое задачи");
-                postTask.Content = Console.ReadLine();
+                postToDoItem.Content = Console.ReadLine();
 
-                taskList.Post(postTask);
-                SerializeToJson(taskList);
+                toDo.Post(postToDoItem);
+                SerializeToJson(toDo);
 
                 return true;
             }
@@ -188,9 +192,9 @@ namespace ToDoList
                 Console.WriteLine("Введите номер задачи, которую вы хотите удалить");
 
                 var id = int.Parse(Console.ReadLine());
-                taskList.Delete(id);
+                toDo.Delete(id);
 
-                SerializeToJson(taskList);
+                SerializeToJson(toDo);
 
                 return true;
             }
@@ -202,9 +206,9 @@ namespace ToDoList
                 Console.WriteLine("Введите изменённое содержимое");
                 var content = Console.ReadLine();
 
-                taskList.UpdateContent(id, content);
+                toDo.UpdateContent(id, content);
 
-                SerializeToJson(taskList);
+                SerializeToJson(toDo);
 
                 return true;
             }
@@ -216,9 +220,9 @@ namespace ToDoList
                 Console.WriteLine("Введите изменённую дату начала выполнения в формате dd.mm.yyyy. Например : 04.06.2005");
                 var start = DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy", cultureInfo);
 
-                taskList.UpdateStart(id, start);
+                toDo.UpdateStart(id, start);
 
-                SerializeToJson(taskList);
+                SerializeToJson(toDo);
 
                 return true;
             }
@@ -230,9 +234,9 @@ namespace ToDoList
                 Console.WriteLine("Введите изменённую дату конца выполнения в формате dd.mm.yyyy. Например : 04.06.2005");
                 var end = DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy", cultureInfo);
 
-                taskList.UpdateEnd(id, end);
+                toDo.UpdateEnd(id, end);
 
-                SerializeToJson(taskList);
+                SerializeToJson(toDo);
 
                 return true;
             }

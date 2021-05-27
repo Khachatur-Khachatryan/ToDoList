@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>View</name>
+    </assembly>
+    <members>
+        <member name="M:ToDoList.Program.ApplicationStart">
+            <summary>
+            Метод для запуска основного приложения
+            </summary>
+        </member>
+        <member name="M:ToDoList.Program.ShowTasks(ToDoList.ToDo)">
+            <summary>
+            Метод для вывода уже существующих задач на экран
+            </summary>
+            <param name="toDo"></param>
+        </member>
+        <member name="M:ToDoList.Program.SerializeToJson(ToDoList.ToDo)">
+            <summary>
+            Метод для сериализации данных в JSON-формат и их записи в файл
+            </summary>
+            <param name="toDo"></param>
+        </member>
+        <member name="M:ToDoList.Program.ShowCommands">
+            <summary>
+            Метод для вывода консольных комманд
+            </summary>
+        </member>
+        <member name="M:ToDoList.Program.ReadCommand(System.String,ToDoList.ToDo,System.Collections.Generic.List{ToDoList.ToDoItem})">
+            <summary>
+            Метод для ввода команды
+            </summary>
+            <param name="readLine"></param>
+            <param name="toDo"></param>
+            <param name="toDoList"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
