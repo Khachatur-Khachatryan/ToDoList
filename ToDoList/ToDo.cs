@@ -25,7 +25,7 @@ namespace ToDoList
             }
         }
 
-        public bool IsReadOnly { get { return false; } }
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// Метод для создания новой задачи
