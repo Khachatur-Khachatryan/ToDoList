@@ -9,4 +9,4 @@
 Для управления версиями я использовал систему контроля версиями [git](https://git-scm.com/)
 ### Авторы
 * Хачатрян Хачатур -- Начальный этап работы -- **[Khachatur-Khachatryan](https://github.com/Khachatur-Khachatryan)**
-* Колосов Петро -- Поправление ошибок -- **[P T](https://github.com/kolosovpetro)**
+* Колосов Петро -- Поправление ошибок -- **[P K](https://github.com/kolosovpetro)**
